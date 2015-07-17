@@ -32,3 +32,15 @@ head(check)
 
 # Calculate the accuracy of the predictions on the temporary smoketest set
 nrow(check[check$actual==check$predicted,])/nrow(check)
+
+##################
+# Real Test Data #
+##################
+# Read the data
+testdata <- read.csv('input/test.csv', header=TRUE)
+
+# Apply the prediction to the initial smoketest data
+testpredictions <- as.integer(predict(forest, newdata=testdata))-1
+
+# Write to csv
+write.table(testpredictions, file = "output/predictions.csv", row.names = FALSE, col.names = FALSE)
