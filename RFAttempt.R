@@ -40,7 +40,7 @@ nrow(check[check$actual==check$predicted,])/nrow(check)
 testdata <- read.csv('input/test.csv', header=TRUE)
 
 # Apply the prediction to the initial smoketest data
-testpredictions <- as.integer(predict(forest, newdata=testdata))-1
+testpredictions <- predict(forest, newdata=testdata)
 
 # Write to csv
-write.table(testpredictions, file = "output/predictions.csv", row.names = FALSE, col.names = FALSE)
+write.table(testpredictions, file = "output/predictions.csv", row.names = TRUE, col.names = c("\"ImageId\",\"Label\""), quote=FALSE, sep=",")
